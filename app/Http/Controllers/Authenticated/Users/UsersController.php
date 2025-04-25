@@ -26,11 +26,15 @@ class UsersController extends Controller
         $subjects = Subjects::all();
         return view('authenticated.users.search', compact('users', 'subjects'));
     }
-
-    public function userProfile($id){
+    // 自分で追加（変更済）
+    public function userProfile($id)
+    {
+        // Eloquentリレーションを使ってユーザーとその科目を取得
         $user = User::with('subjects')->findOrFail($id);
-        $subject_lists = Subjects::all();
-        return view('authenticated.users.profile', compact('user', 'subject_lists'));
+        // ユーザーの科目を取得
+        $subjects = $user->subjects;
+        // ビューに渡す
+        return view('authenticated.users.profile', compact('user', 'subjects'));
     }
 
     public function userEdit(Request $request){
