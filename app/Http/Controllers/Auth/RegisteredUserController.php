@@ -35,7 +35,9 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+
+    // store(Request $request)から変更
+    public function store(RegisterUserRequest $request)
     {
         DB::beginTransaction();
         try{
